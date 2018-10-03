@@ -1,0 +1,49 @@
+html, body {
+    height:100%;
+    width:100%
+}
+.container {
+    height:100%;
+    width:100%;
+}
+
+
+.leftside {
+    width:20%;
+    height: 100%;
+    background-color:black;
+    color: white;
+    float: left;
+}
+
+.rightside {
+width:80%;
+height: 100%;
+background-color: whitesmoke;
+float:right;
+}
+
+nav {
+    position:relative;
+    top:20%;
+    text-align: center;
+}
+
+li {
+    padding: 10px 10px 10px 10px;
+}
+
+form {
+    padding: 10px 10px 10px 10px;
+    float: left;
+}
+
+.contactInfo {
+    border: 2px solid black;
+    margin: 10px 10px 10px 10px;
+    width: 20%;
+}
+
+.glass {
+    padding: 9px;
+}

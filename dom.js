@@ -63,6 +63,21 @@ const $ = function (selector) {
     }
   }
 
+  // function to hide the sections
+
+  const hide = function () {
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].style.display ="none";
+    }
+  }
+
+  const show = function() {
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].style.display ="";
+    }
+  }
+  
+
   return {
     text: text,
     html: html,
@@ -73,6 +88,8 @@ const $ = function (selector) {
     append: append,
     prepend: prepend,
     on: on,
-    val: val
+    val: val,
+    show: show,
+    hide: hide
   };
 }

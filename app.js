@@ -7,3 +7,31 @@ const renderView = function (){
     }
 };
 renderView();
+
+
+const addFn = function(){
+    const name1 = $(".nameForm").val();
+    const offNum = $(".officeNumForm").val();
+    const phoneNum = $(".phoneNumForm").val();
+    let i = employeeList.length;
+    employeeList[i].name = name1;
+    employeeList[i].officeNum = offNum;
+    employeeList[i].phoneNum = phoneNum;
+}
+
+const showView = function() {
+$('form').hide();
+$('.glass').hide();
+};
+
+const showAdd = function (){
+    $('form').show();
+    $('.glass').show();
+    addFn();
+    renderView();
+};
+
+
+
+$("#view").on('click', showView);
+$("#add").on('click', showAdd);
