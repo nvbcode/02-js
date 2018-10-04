@@ -1,13 +1,41 @@
-const renderView = function () {
-    for (i = 0; i < employeeList.length; i++) {
+const renderList = function(content) {
+    console.log(content);
+    $('.contacts').html(content);
+}
+
+let contactList = '';
+const getList = function() {
+    
+    for(let i=0; i<employeeList.length; i++){
         let name = employeeList[i].name;
         let officeNum = employeeList[i].officeNum;
         let phoneNum = employeeList[i].phoneNum;
-        $(".contacts").append(` <div class="contactInfo"> <p> ${name}</p> <p> ${officeNum}</p> <p> ${phoneNum}</p> </div>`);
+
+       contactList += ` <div class="contactInfo"> <p> ${name}</p> <p> ${officeNum}</p> <p> ${phoneNum}</p> </div>`;
+
     }
+    renderList(contactList);
+}
+
+let viewFinder = '';
+const switchBoard = function (){
+    console.log(viewFinder);
+
+    switch (viewFinder) {
+        case 'showView':
+        break;
+        case 'showAdd':
+        addFn();
+        break;
+        case 'showVerify':
+        verifyFn();
+        break;
+        case 'showUpdate':
+        break;
+        case 'showDelete':
+        break;
+    };
 };
-
-
 
 const showVeri = function(cb) {
     $('.verifyShow').html(`<p> ${cb} </p>`);
@@ -24,7 +52,7 @@ const addFn = function () {
     });
 
     $(".contacts").empty();
-    renderView();
+    getList();
     $(".contacts").show();
 };
 
@@ -47,44 +75,44 @@ const showView = function () {
     $('.phoneNumForm').hide();
     $('.glass').hide();
     $('.contacts').show();
+    viewFinder = "showView";
 
 };
 
 const showAdd = function () {
-    $('.glass').addClass('addTog');
-    $('.glass').addClass('verifyTog');
-    $('.glass').addClass('UpdateTog');
-    $('.glass').removeClass('verifyTog');
-    $('.glass').removeClass('UpdateTog');
     $('.verifyShow').empty();
     $('.nameForm').show();
     $('.officeNumForm').show();
     $('.phoneNumForm').show();
     $('.glass').show();
     $('.contacts').hide();
-    // $('.glass').toggleClass('verifyTog');
-    // $('.glass').toggleClass('updateTog');
-    $(".addTog").on('click', addFn);
+    viewFinder = "showAdd";
 };
 
 const showVerify = function () {
-    $('.glass').addClass('addTog');
-    $('.glass').addClass('verifyTog');
-    $('.glass').addClass('UpdateTog');
-    $('.glass').removeClass('addTog');
-    $('.glass').removeClass('UpdateTog');
     $('.contacts').hide();
     $('.officeNumForm').hide();
     $('.phoneNumForm').hide();
     $('.nameForm').show();
     $('.glass').show();
-    // $('.glass').toggleClass('addTog');
-    // $('.glass').toggleClass('updateTog');
-    $('.verifyTog').on("click", verifyFn);
-
+    viewFinder = "showVerify";
 };
 
-renderView();
+const showUpdate = function () {
+    $('.contacts').hide();
+    $('.officeNumForm').hide();
+    $('.phoneNumForm').hide();
+    $('.nameForm').show();
+    $('.glass').show();
+    viewFinder = "showVerify";
+};
+
+
 $("#view").on('click', showView);
 $("#add").on('click', showAdd);
 $("#verify").on('click', showVerify);
+$("#update").on('click', showUpdate);
+$("#delete").on('click', showDelete);
+$('.glass').on("click", switchBoard);
+
+
