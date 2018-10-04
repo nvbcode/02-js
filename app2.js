@@ -1,43 +1,45 @@
-const renderList = function(content) {
+const renderList = function (content) {
     console.log(content);
     $('.contacts').html(content);
 }
 
-let contactList = '';
-const getList = function() {
-    
-    for(let i=0; i<employeeList.length; i++){
+
+const getList = function () {
+    let contactList = '';
+    for (let i = 0; i < employeeList.length; i++) {
         let name = employeeList[i].name;
         let officeNum = employeeList[i].officeNum;
         let phoneNum = employeeList[i].phoneNum;
 
-       contactList += ` <div class="contactInfo"> <p> ${name}</p> <p> ${officeNum}</p> <p> ${phoneNum}</p> </div>`;
+        contactList += ` <div class="contactInfo"> <p> ${name}</p> <p> ${officeNum}</p> <p> ${phoneNum}</p> </div>`;
 
     }
     renderList(contactList);
 }
 
 let viewFinder = '';
-const switchBoard = function (){
+const switchBoard = function () {
     console.log(viewFinder);
 
     switch (viewFinder) {
         case 'showView':
-        break;
+            break;
         case 'showAdd':
-        addFn();
-        break;
+            addFn();
+            break;
         case 'showVerify':
-        verifyFn();
-        break;
+            verifyFn();
+            break;
         case 'showUpdate':
-        break;
+            updateFn();
+            break;
         case 'showDelete':
-        break;
+        deleteFn();
+            break;
     };
 };
 
-const showVeri = function(cb) {
+const showVeri = function (cb) {
     $('.verifyShow').html(`<p> ${cb} </p>`);
 };
 
@@ -51,8 +53,9 @@ const addFn = function () {
         phoneNum: phoneNum
     });
 
-    $(".contacts").empty();
+    $(".contactInfo").empty();
     getList();
+
     $(".contacts").show();
 };
 
@@ -62,57 +65,98 @@ const verifyFn = function () {
     console.log(response);
     for (let i = 0; i < employeeList.length; i++) {
         if (employeeList[i].name === verifyName) {
-           response = 'Yes';
-        }
-    }
+            response = 'Yes';
+        };
+    };
     showVeri(response);
 };
 
-const showView = function () {
-    $('.verifyShow').empty();
-    $('.nameForm').hide();
-    $('.officeNumForm').hide();
-    $('.phoneNumForm').hide();
-    $('.glass').hide();
-    $('.contacts').show();
-    viewFinder = "showView";
+const updateFn = function () {
+    const updateName = $('.nameForm').val();
+    const officeNum = $('.officeNumForm').val();
+    const phoneNum = $('.phoneNumForm').val();
+    for (let i = 0; i < employeeList.length; i++) {
+        if (employeeList[i].name === updateName) {
+            employeeList[i].officeNum = officeNum;
+            employeeList[i].phoneNum = phoneNum;
+            console.log(employeeList[i].phoneNum);
+        };
+    };
+    $(".contactInfo").empty();
+    getList();
+    $(".contacts").show();
+}
 
-};
-
-const showAdd = function () {
-    $('.verifyShow').empty();
-    $('.nameForm').show();
-    $('.officeNumForm').show();
-    $('.phoneNumForm').show();
-    $('.glass').show();
-    $('.contacts').hide();
-    viewFinder = "showAdd";
-};
-
-const showVerify = function () {
-    $('.contacts').hide();
-    $('.officeNumForm').hide();
-    $('.phoneNumForm').hide();
-    $('.nameForm').show();
-    $('.glass').show();
-    viewFinder = "showVerify";
-};
-
-const showUpdate = function () {
-    $('.contacts').hide();
-    $('.officeNumForm').hide();
-    $('.phoneNumForm').hide();
-    $('.nameForm').show();
-    $('.glass').show();
-    viewFinder = "showVerify";
-};
+const deleteFn = function () {
+    let updateName = $('.nameForm').val();
+    for (let i = 0; i < employeeList.length; i++) {
+        if (employeeList[i].name === updateName) {
+        employeeList.splice(i,1);
+        };
+    };
+    $(".contactInfo").empty();
+    getList();
+    $(".contacts").show();
+}
 
 
-$("#view").on('click', showView);
-$("#add").on('click', showAdd);
-$("#verify").on('click', showVerify);
-$("#update").on('click', showUpdate);
-$("#delete").on('click', showDelete);
-$('.glass').on("click", switchBoard);
+    const showView = function () {
+        $('.verifyShow').empty();
+        $('.nameForm').hide();
+        $('.officeNumForm').hide();
+        $('.phoneNumForm').hide();
+        $('.glass').hide();
+        $('.contacts').show();
+        viewFinder = "showView";
+
+    };
+
+    const showAdd = function () {
+        $('.verifyShow').empty();
+        $('.nameForm').show();
+        $('.officeNumForm').show();
+        $('.phoneNumForm').show();
+        $('.glass').show();
+        $('.contacts').hide();
+        viewFinder = "showAdd";
+    };
+
+    const showVerify = function () {
+        $('.contacts').hide();
+        $('.officeNumForm').hide();
+        $('.phoneNumForm').hide();
+        $('.nameForm').show();
+        $('.glass').show();
+        viewFinder = "showVerify";
+    };
+
+    const showUpdate = function () {
+        $('.verifyShow').empty();
+        $('.contacts').hide();
+        $('.officeNumForm').show();
+        $('.phoneNumForm').show();
+        $('.nameForm').show();
+        $('.glass').show();
+        viewFinder = "showUpdate";
+    };
+
+    const showDelete = function () {
+        $('.verifyShow').empty();
+        $('.contacts').hide();
+        $('.officeNumForm').hide();
+        $('.phoneNumForm').hide();
+        $('.nameForm').show();
+        $('.glass').show();
+        viewFinder = "showDelete";
+    };
+
+    // remember to add generate onload for view to work
+    $("contacts").on('onload', getList());
+    $("#view").on('click', showView);
+    $("#add").on('click', showAdd);
+    $("#verify").on('click', showVerify);
+    $("#update").on('click', showUpdate);
+    $("#delete").on('click', showDelete);
+    $('.glass').on("click", switchBoard);
 
 
