@@ -34,7 +34,7 @@ const switchBoard = function () {
             updateFn();
             break;
         case 'showDelete':
-        deleteFn();
+            deleteFn();
             break;
     };
 };
@@ -91,7 +91,7 @@ const deleteFn = function () {
     let updateName = $('.nameForm').val();
     for (let i = 0; i < employeeList.length; i++) {
         if (employeeList[i].name === updateName) {
-        employeeList.splice(i,1);
+            employeeList.splice(i, 1);
         };
     };
     $(".contactInfo").empty();
@@ -100,63 +100,63 @@ const deleteFn = function () {
 }
 
 
-    const showView = function () {
-        $('.verifyShow').empty();
-        $('.nameForm').hide();
-        $('.officeNumForm').hide();
-        $('.phoneNumForm').hide();
-        $('.glass').hide();
-        $('.contacts').show();
-        viewFinder = "showView";
+const showView = function () {
+    $('.verifyShow').empty();
+    $('.nameForm').hide();
+    $('.officeNumForm').hide();
+    $('.phoneNumForm').hide();
+    $('.glass').hide();
+    $('.contacts').show();
+    viewFinder = "showView";
 
-    };
+};
 
-    const showAdd = function () {
-        $('.verifyShow').empty();
-        $('.nameForm').show();
-        $('.officeNumForm').show();
-        $('.phoneNumForm').show();
-        $('.glass').show();
-        $('.contacts').hide();
-        viewFinder = "showAdd";
-    };
+const showAdd = function () {
+    $('.verifyShow').empty();
+    $('.nameForm').show();
+    $('.officeNumForm').show();
+    $('.phoneNumForm').show();
+    $('.glass').show();
+    $('.contacts').hide();
+    viewFinder = "showAdd";
+};
 
-    const showVerify = function () {
-        $('.contacts').hide();
-        $('.officeNumForm').hide();
-        $('.phoneNumForm').hide();
-        $('.nameForm').show();
-        $('.glass').show();
-        viewFinder = "showVerify";
-    };
+const showVerify = function () {
+    $('.contacts').hide();
+    $('.officeNumForm').hide();
+    $('.phoneNumForm').hide();
+    $('.nameForm').show();
+    $('.glass').show();
+    viewFinder = "showVerify";
+};
 
-    const showUpdate = function () {
-        $('.verifyShow').empty();
-        $('.contacts').hide();
-        $('.officeNumForm').show();
-        $('.phoneNumForm').show();
-        $('.nameForm').show();
-        $('.glass').show();
-        viewFinder = "showUpdate";
-    };
+const showUpdate = function () {
+    $('.verifyShow').empty();
+    $('.contacts').hide();
+    $('.officeNumForm').show();
+    $('.phoneNumForm').show();
+    $('.nameForm').show();
+    $('.glass').show();
+    viewFinder = "showUpdate";
+};
 
-    const showDelete = function () {
-        $('.verifyShow').empty();
-        $('.contacts').hide();
-        $('.officeNumForm').hide();
-        $('.phoneNumForm').hide();
-        $('.nameForm').show();
-        $('.glass').show();
-        viewFinder = "showDelete";
-    };
+const showDelete = function () {
+    $('.verifyShow').empty();
+    $('.contacts').hide();
+    $('.officeNumForm').hide();
+    $('.phoneNumForm').hide();
+    $('.nameForm').show();
+    $('.glass').show();
+    viewFinder = "showDelete";
+};
 
-    // remember to add generate onload for view to work
-    $("contacts").on('onload', getList());
-    $("#view").on('click', showView);
-    $("#add").on('click', showAdd);
-    $("#verify").on('click', showVerify);
-    $("#update").on('click', showUpdate);
-    $("#delete").on('click', showDelete);
-    $('.glass').on("click", switchBoard);
+// remember to add generate onload for view to work
+$("contacts").on('onload', getList());
+$("#view").on('click', showView);
+$("#add").on('click', showAdd);
+$("#verify").on('click', showVerify);
+$("#update").on('click', showUpdate);
+$("#delete").on('click', showDelete);
+$('.glass').on("click", switchBoard);
 
 
